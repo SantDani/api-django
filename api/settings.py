@@ -28,6 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # DEBUG = True
 # DEBUG = 1
 # Initialise environment variables
+# Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
@@ -49,9 +50,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'ckeditor',
-    # 'users'
+
+    'users',
+    'experiences',
+    'projects',
+    'education',
+    'extras',
+
+
+
 
 ]
 
@@ -95,11 +105,11 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'curriculum',
-        'USER': 'alber',
-        'PASSWORD': '#T\MzF]qe:z4#tt#',
-        'HOST': 'db',
-        'PORT': '5432',
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': os.environ['POSTGRES_HOST'],
+        'PORT': os.environ['POSTGRES_PORT'],
     }
 }
 
@@ -147,4 +157,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
